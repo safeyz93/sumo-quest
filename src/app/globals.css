@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   SUMO design tokens
+   Palette straight from the brief: #211951 #836FFF #15F5BA #F0F3FF.
+   Roles: void = page bg, deep = panel bg, paper = ink/light, violet = accent A,
+   mint = accent B / success / primary action, alert = errors only.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-void: #211951;
+  --color-deep: #170f3a;
+  --color-paper: #f0f3ff;
+  --color-violet: #836fff;
+  --color-mint: #15f5ba;
+  --color-alert: #ff5c7a;
+
+  --font-display: var(--font-anton), "Impact", "Haettenschweiler", sans-serif;
+  --font-body: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Hard neo-brutalist shadows — no blur, ever. */
+  --shadow-hard-sm: 3px 3px 0 0 #15f5ba;
+  --shadow-hard: 5px 5px 0 0 #15f5ba;
+  --shadow-hard-violet: 5px 5px 0 0 #836fff;
+  --shadow-hard-paper: 5px 5px 0 0 #f0f3ff;
+  --shadow-hard-ink: 6px 6px 0 0 #211951;
+  --shadow-hard-alert: 5px 5px 0 0 #ff5c7a;
+  --shadow-hard-lg: 8px 8px 0 0 #836fff;
+  --shadow-hard-lg-mint: 8px 8px 0 0 #15f5ba;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 2.2s ease-in-out infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-rise-late: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+  --animate-stamp: stamp 0.6s cubic-bezier(0.22, 1.4, 0.36, 1) both;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-blink: blink 1.2s steps(2, start) infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(0.78);
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes stamp {
+    0% {
+      opacity: 0;
+      transform: scale(1.6) rotate(-10deg);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(0.96) rotate(-3deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(-3deg);
+    }
+  }
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-paper);
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background-color: var(--color-mint);
+    color: var(--color-void);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-mint);
+    outline-offset: 3px;
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+/* Decorative helpers (palette tokens, no raw hex in components). */
+.bg-dot-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-paper) 16%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+.bg-sunburst {
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    color-mix(in srgb, var(--color-violet) 14%, transparent) 0deg 7deg,
+    transparent 7deg 26deg
+  );
+}
+
+.text-outline-paper {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-paper);
+}
+
+.text-outline-void {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-void);
+}
+
+.marquee-mask {
+  --mask-start: 2%;
+  --mask-end: 98%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--mask-start),
+    #000 var(--mask-end),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--mask-start),
+    #000 var(--mask-end),
+    transparent
+  );
+}
+
+.vertical-jp {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.3em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

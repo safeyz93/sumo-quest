@@ -1,0 +1,42 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.tsbuildinfo
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env — NEVER commit real secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# JSON database + atomic-write temp files
+/data/*.json
+/data/*.tmp
+/data/*.json.*.tmp
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo

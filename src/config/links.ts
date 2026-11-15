@@ -1,0 +1,6 @@
+export const LINKS = {
+  SUMO_TWITTER_PROFILE: "https://x.com/SUMO_fake",
+  SUMO_TWITTER_USERNAME: "SUMO_fake",
+  SUMO_LAST_POST: "https://x.com/SUMO_fake/status/0000000000000000000",
+  SUMO_LAST_POST_ID: "0000000000000000000",
+};
